@@ -17,7 +17,7 @@ The `index.json` schema defines the structure for individual lab configurations,
 
 ```json
 {
-  "$schema": "https://cdn.jsdelivr.net/gh/labex-labs/schema/index.json"
+  "$schema": "https://cdn.jsdelivr.net/npm/@labex-labs/schema/index.json"
 }
 ```
 
@@ -34,6 +34,15 @@ The `course.json` schema defines the structure for course configurations, includ
 
 ```json
 {
-  "$schema": "https://cdn.jsdelivr.net/gh/labex-labs/schema/course.json"
+  "$schema": "https://cdn.jsdelivr.net/npm/@labex-labs/schema/course.json"
 }
+```
+
+## Publish to NPM
+
+Update the version in `package.json`, then run the following commands to publish to NPM:
+
+```bash
+npm version patch
+git push && git push --tags
 ```
