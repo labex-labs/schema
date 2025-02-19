@@ -13,8 +13,6 @@ The `index.json` schema defines the structure for individual lab configurations,
 - Metadata for SEO
 - License and contributor information
 
-### CDN
-
 ```json
 {
   "$schema": "https://cdn.jsdelivr.net/gh/labex-labs/schema/index.json"
@@ -31,8 +29,6 @@ The `course.json` schema defines the structure for course configurations, includ
 - Course settings (fee type, ordering, visibility)
 - Internationalization (i18n) support
 - Metadata for SEO
-
-### CDN
 
 ```json
 {
