@@ -1,6 +1,6 @@
 # LabEx Schema
 
-[![](https://data.jsdelivr.com/v1/package/gh/labex-labs/schema/badge)](https://www.jsdelivr.com/package/gh/labex-labs/schema)
+[![](https://data.jsdelivr.com/v1/package/npm/@labex-labs/schema/badge)](https://www.jsdelivr.com/package/npm/@labex-labs/schema)
 
 This repository contains the JSON Schema definitions for LabEx configuration files. These schemas define the structure and validation rules for lab and course configurations in the LabEx platform.
 
