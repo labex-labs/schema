@@ -1,0 +1,34 @@
+{
+  "name": "@labex-labs/schema",
+  "version": "1.0.0",
+  "description": "JSON Schema definitions for LabEx lab and course configurations",
+  "main": "index.json",
+  "files": [
+    "*.json",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "echo \"No test specified\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/labex-labs/schema.git"
+  },
+  "keywords": [
+    "labex",
+    "labex-labs",
+    "schema",
+    "json-schema",
+    "validation",
+    "configuration"
+  ],
+  "author": "LabEx",
+  "license": "MIT",
+  "homepage": "https://labex.io/",
+  "bugs": {
+    "url": "https://github.com/labex-labs/schema/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
