@@ -4,9 +4,9 @@ This repository contains the JSON Schema definitions for LabEx configuration fil
 
 ## Schemas
 
-### lab.json
+### index.json
 
-The `lab.json` schema defines the structure for individual lab configurations, including:
+The `index.json` schema defines the structure for individual lab configurations, including:
 
 - Basic lab information (title, description, difficulty)
 - Lab steps and verification rules
