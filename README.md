@@ -2,9 +2,7 @@
 
 This repository contains the JSON Schema definitions for LabEx configuration files. These schemas define the structure and validation rules for lab and course configurations in the LabEx platform.
 
-## Schemas
-
-### index.json
+## index.json
 
 The `index.json` schema defines the structure for individual lab configurations, including:
 
@@ -15,7 +13,15 @@ The `index.json` schema defines the structure for individual lab configurations,
 - Metadata for SEO
 - License and contributor information
 
-### course.json
+### CDN
+
+```json
+{
+  "$schema": "https://cdn.jsdelivr.net/gh/labex-labs/schema/index.json"
+}
+```
+
+## course.json
 
 The `course.json` schema defines the structure for course configurations, including:
 
@@ -26,12 +32,10 @@ The `course.json` schema defines the structure for course configurations, includ
 - Internationalization (i18n) support
 - Metadata for SEO
 
-## Usage
-
-These schemas can be referenced in your JSON configuration files using the `$schema` property:
+### CDN
 
 ```json
 {
-  "$schema": "https://raw.githubusercontent.com/labex-dev/labex-schema/main/lab.json"
+  "$schema": "https://cdn.jsdelivr.net/gh/labex-labs/schema/course.json"
 }
 ```
