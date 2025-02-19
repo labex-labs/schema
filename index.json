@@ -1,0 +1,403 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LabEx index.json schema",
+  "type": "object",
+  "required": [
+    "type",
+    "title",
+    "description",
+    "meta",
+    "difficulty",
+    "time",
+    "details",
+    "backend"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": ["lab", "challenge"]
+    },
+    "title": {
+      "type": "string",
+      "description": "English title of the lab, Use Title Case"
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief English description of the lab"
+    },
+    "meta": {
+      "type": "object",
+      "required": ["title", "description", "keywords"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "English SEO title of the lab, Use Title Case"
+        },
+        "description": {
+          "type": "string",
+          "description": "English SEO description of the lab"
+        },
+        "keywords": {
+          "type": "string",
+          "description": "English SEO keywords of the lab, separated by commas"
+        }
+      }
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": ["Beginner", "Intermediate", "Advanced"],
+      "description": "Difficulty level of the lab"
+    },
+    "time": {
+      "type": "integer",
+      "description": "Estimated completion time (in minutes)"
+    },
+    "hidden": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to hide in the list"
+    },
+    "fee_type": {
+      "type": "string",
+      "enum": ["free", "pro"],
+      "description": "Fee type"
+    },
+    "show_in_tutorial": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to show in tutorials"
+    },
+    "verified": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the lab is verified"
+    },
+    "details": {
+      "type": "object",
+      "required": ["steps", "intro", "finish"],
+      "properties": {
+        "steps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["title", "text", "verify", "skills"],
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "$lab_type": { "const": "challenge" }
+                  },
+                  "required": ["$lab_type"]
+                },
+                "then": {
+                  "required": ["solutions"]
+                }
+              }
+            ],
+            "properties": {
+              "title": {
+                "type": "string",
+                "description": "Step title"
+              },
+              "text": {
+                "type": "string",
+                "pattern": "^(en/)?step[1-9][0-9]*.md$",
+                "description": "Path to the step content Markdown file. Use 'step1.md' if no i18n exists, or 'en/step1.md' if i18n exists"
+              },
+              "verify": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["name", "file", "hint"],
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Verification step name, use Title Case"
+                    },
+                    "file": {
+                      "type": "string",
+                      "pattern": "^verify[1-9][0-9]*-[1-9][0-9]*.sh$",
+                      "description": "Path to verification script, must follow pattern: verify1-1.sh, verify1-2.sh, etc."
+                    },
+                    "hint": {
+                      "type": "string",
+                      "description": "Hint shown when verification fails"
+                    },
+                    "timeout": {
+                      "type": "integer",
+                      "default": 0,
+                      "description": "Verification timeout in seconds"
+                    },
+                    "showstderr": {
+                      "type": "boolean",
+                      "default": false,
+                      "description": "Whether to show stderr output"
+                    }
+                  }
+                }
+              },
+              "skills": {
+                "type": "array",
+                "default": [],
+                "items": {
+                  "type": "string"
+                },
+                "description": "Related skill tags, make sure the skill tags are in the skill list"
+              },
+              "solutions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "List of paths to solution Markdown files, use relative path"
+              }
+            }
+          }
+        },
+        "intro": {
+          "type": "object",
+          "required": ["text"],
+          "properties": {
+            "text": {
+              "type": "string",
+              "pattern": "^(en/)?intro.md$",
+              "description": "Path to introduction content Markdown file. Use 'intro.md' if no i18n exists, or 'en/intro.md' if i18n exists"
+            },
+            "title": {
+              "type": "string",
+              "enum": ["Introduction"],
+              "description": "Introduction title, use Title Case"
+            },
+            "background": {
+              "type": "string",
+              "enum": ["setup.sh"],
+              "description": "Path to background setup script, must be setup.sh"
+            }
+          }
+        },
+        "finish": {
+          "type": "object",
+          "required": ["text"],
+          "properties": {
+            "text": {
+              "type": "string",
+              "pattern": "^(en/)?finish.md$",
+              "description": "Path to summary content Markdown file. Use 'finish.md' if no i18n exists, or 'en/finish.md' if i18n exists"
+            },
+            "title": {
+              "type": "string",
+              "enum": ["Summary"],
+              "description": "Summary title, use Title Case"
+            }
+          }
+        }
+      }
+    },
+    "backend": {
+      "type": "object",
+      "required": ["imageid"],
+      "properties": {
+        "imageid": {
+          "type": "string",
+          "enum": [
+            "vnc-ubuntu:2204",
+            "webide-ubuntu:2204",
+            "jupyter-ubuntu:2204",
+            "vnc-instance-ubuntu:2204",
+            "vnc-instance-ubuntu-bigdata:2204",
+            "vnc-ubuntu-privileged:2204",
+            "vnc-instance-ubuntu-kali:2204",
+            "webide-instance-ubuntu:2204",
+            "vnc-instance-ubuntu-jenkins:2204",
+            "rhcsa-ubi9",
+            "vnc-instance-ubuntu-docker:2204",
+            "claude",
+            "desktop-start"
+          ],
+          "description": "Docker image ID used by backend, make sure the image is in the image list"
+        },
+        "open_network": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to enable network access"
+        }
+      }
+    },
+    "contributors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of contributors"
+    },
+    "license": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "License name"
+        },
+        "url": {
+          "type": "string",
+          "description": "License URL"
+        },
+        "repo": {
+          "type": "string",
+          "description": "Source code repository URL"
+        }
+      }
+    },
+    "i18n": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["lang", "title", "description", "meta", "details"],
+        "properties": {
+          "lang": {
+            "type": "string",
+            "enum": ["zh", "es", "fr", "de", "ja", "ru"],
+            "description": "Language code"
+          },
+          "title": {
+            "type": "string",
+            "description": "Localized title"
+          },
+          "description": {
+            "type": "string",
+            "description": "Localized description"
+          },
+          "meta": {
+            "type": "object",
+            "required": ["title", "description", "keywords"],
+            "properties": {
+              "title": {
+                "type": "string",
+                "description": "Localized SEO title"
+              },
+              "description": {
+                "type": "string",
+                "description": "Localized SEO description"
+              },
+              "keywords": {
+                "type": "string",
+                "description": "Localized SEO keywords"
+              }
+            }
+          },
+          "details": {
+            "type": "object",
+            "required": ["steps", "intro", "finish"],
+            "properties": {
+              "steps": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["title", "text", "verify"],
+                  "allOf": [
+                    {
+                      "if": {
+                        "properties": {
+                          "$lab_type": { "const": "challenge" }
+                        },
+                        "required": ["$lab_type"]
+                      },
+                      "then": {
+                        "required": ["solutions"]
+                      }
+                    }
+                  ],
+                  "properties": {
+                    "title": {
+                      "type": "string",
+                      "description": "Localized step title, use Title Case"
+                    },
+                    "text": {
+                      "type": "string",
+                      "pattern": "^[a-z]{2}/step[1-9][0-9]*.md$",
+                      "description": "Localized step content file path, must follow pattern: {lang}/step1.md (e.g., zh/step1.md)"
+                    },
+                    "verify": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": ["name", "file", "hint"],
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "description": "Localized verification step name, use Title Case"
+                          },
+                          "file": {
+                            "type": "string",
+                            "pattern": "^verify[1-9][0-9]*-[1-9][0-9]*.sh$",
+                            "description": "Path to verification script, must follow pattern: verify1-1.sh, verify1-2.sh, etc."
+                          },
+                          "hint": {
+                            "type": "string",
+                            "description": "Localized verification failure hint"
+                          }
+                        }
+                      }
+                    },
+                    "solutions": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "List of paths to localized solution Markdown files, use relative path"
+                    }
+                  }
+                }
+              },
+              "intro": {
+                "type": "object",
+                "required": ["text", "title"],
+                "properties": {
+                  "text": {
+                    "type": "string",
+                    "pattern": "^[a-z]{2}/intro.md$",
+                    "description": "Localized introduction content file path, must follow pattern: {lang}/intro.md (e.g., zh/intro.md)"
+                  },
+                  "title": {
+                    "type": "string",
+                    "enum": [
+                      "介绍",
+                      "Introducción",
+                      "Introduction",
+                      "Einführung",
+                      "はじめに",
+                      "Введение"
+                    ],
+                    "description": "Localized introduction title, use Title Case"
+                  }
+                }
+              },
+              "finish": {
+                "type": "object",
+                "required": ["text", "title"],
+                "properties": {
+                  "text": {
+                    "type": "string",
+                    "pattern": "^[a-z]{2}/finish.md$",
+                    "description": "Localized summary content file path, must follow pattern: {lang}/finish.md (e.g., zh/finish.md)"
+                  },
+                  "title": {
+                    "type": "string",
+                    "enum": [
+                      "总结",
+                      "Resumen",
+                      "Résumé",
+                      "Zusammenfassung",
+                      "まとめ",
+                      "Резюме"
+                    ],
+                    "description": "Localized summary title, use Title Case"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

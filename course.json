@@ -1,0 +1,256 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LabEx course.json schema",
+  "type": "object",
+  "required": [
+    "name",
+    "description",
+    "meta",
+    "cover",
+    "level",
+    "alias",
+    "tags",
+    "skill_tree",
+    "priority",
+    "type",
+    "fee_type",
+    "is_orderly",
+    "hidden",
+    "show_step_name",
+    "intro"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "English title of the course, Use Title Case"
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief English description of the course"
+    },
+    "meta": {
+      "type": "object",
+      "required": ["title", "description", "keywords"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "English SEO title of the course"
+        },
+        "description": {
+          "type": "string",
+          "description": "English SEO description of the course"
+        },
+        "keywords": {
+          "type": "string",
+          "description": "English SEO keywords of the course, separated by commas"
+        }
+      }
+    },
+    "cover": {
+      "type": "string",
+      "description": "URL of the course cover image"
+    },
+    "level": {
+      "type": "string",
+      "enum": ["Beginner", "Intermediate", "Advanced"],
+      "description": "Difficulty level of the course"
+    },
+    "alias": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z-0-9]+$",
+        "description": "URL alias (lowercase letters, hyphens, and numbers only)"
+      },
+      "description": "List of URL aliases for the course"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of technology tags"
+    },
+    "skill_tree": {
+      "type": "string",
+      "enum": [
+        "rust",
+        "go",
+        "sklearn",
+        "mysql",
+        "git",
+        "pygame",
+        "cpp",
+        "sql",
+        "opencv",
+        "alibabacloud",
+        "python",
+        "pandas",
+        "javascript",
+        "linux",
+        "algorithm",
+        "ml",
+        "tkinter",
+        "matplotlib",
+        "css",
+        "shell",
+        "java",
+        "html",
+        "flask",
+        "react",
+        "ansible",
+        "jquery",
+        "django",
+        "c",
+        "docker",
+        "jenkins",
+        "numpy",
+        "kubernetes",
+        "hadoop",
+        "cybersecurity",
+        "mongodb",
+        "web-development"
+      ],
+      "description": "Associated skill tree identifier"
+    },
+    "priority": {
+      "type": "integer",
+      "description": "Course priority/order in listings"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["normal", "project"],
+      "description": "Course type"
+    },
+    "fee_type": {
+      "type": "string",
+      "enum": ["free", "pro"],
+      "description": "Fee type"
+    },
+    "lab_coins": {
+      "type": "integer",
+      "description": "Cost in lab coins"
+    },
+    "is_orderly": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether labs must be completed in order"
+    },
+    "hidden": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to hide in the list"
+    },
+    "has_cert": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether course offers certification"
+    },
+    "show_step_name": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to show step names"
+    },
+    "intro": {
+      "type": "string",
+      "description": "Path to introduction content Markdown file"
+    },
+    "labs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path"],
+        "properties": {
+          "path": {
+            "type": "string",
+            "pattern": "^[\\w-]+/[\\w-]+:[\\w/-]+$",
+            "description": "Path to the lab in format 'organization/repository:path/to/lab'"
+          }
+        }
+      }
+    },
+    "stages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "labs"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the stage"
+          },
+          "labs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["path"],
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "pattern": "^[\\w-]+/[\\w-]+:[\\w/-]+$",
+                  "description": "Path to the lab in format 'organization/repository:path/to/lab'"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "i18n": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["lang", "name", "description", "meta", "cover", "intro"],
+        "properties": {
+          "lang": {
+            "type": "string",
+            "enum": ["zh", "es", "fr", "de", "ja", "ru"],
+            "description": "Language code"
+          },
+          "name": {
+            "type": "string",
+            "description": "Localized course name"
+          },
+          "description": {
+            "type": "string",
+            "description": "Localized course description"
+          },
+          "meta": {
+            "type": "object",
+            "required": ["title", "description", "keywords"],
+            "properties": {
+              "title": {
+                "type": "string",
+                "description": "Localized SEO title"
+              },
+              "description": {
+                "type": "string",
+                "description": "Localized SEO description"
+              },
+              "keywords": {
+                "type": "string",
+                "description": "Localized SEO keywords"
+              }
+            }
+          },
+          "cover": {
+            "type": "string",
+            "description": "URL of localized course cover image"
+          },
+          "intro": {
+            "type": "string",
+            "description": "Path to localized introduction content file"
+          }
+        }
+      }
+    }
+  },
+  "oneOf": [
+    {
+      "required": ["labs"]
+    },
+    {
+      "required": ["stages"]
+    }
+  ]
+}
