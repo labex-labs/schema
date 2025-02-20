@@ -322,6 +322,11 @@
         }
       }
     },
+    "redirect_lab": {
+      "type": "string",
+      "pattern": "^[\\w-]+/[\\w-]+:[\\w/-]+$",
+      "description": "Path to redirect to another lab (e.g., 'labex-labs/labs:python/lab-your-first-python-lab')"
+    },
     "i18n": {
       "type": "array",
       "items": {
