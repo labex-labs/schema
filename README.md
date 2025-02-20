@@ -1,6 +1,6 @@
 # LabEx Schema
 
-[![](https://data.jsdelivr.com/v1/package/npm/@labex-labs/schema/badge)](https://www.jsdelivr.com/package/npm/@labex-labs/schema)
+[![JSDelivr](https://data.jsdelivr.com/v1/package/gh/labex-labs/schema/badge)](https://www.jsdelivr.com/package/gh/labex-labs/schema)
 
 This repository contains the JSON Schema definitions for LabEx configuration files. These schemas define the structure and validation rules for lab and course configurations in the LabEx platform.
 
@@ -17,7 +17,7 @@ The `index.json` schema defines the structure for individual lab configurations,
 
 ```json
 {
-  "$schema": "https://cdn.jsdelivr.net/npm/@labex-labs/schema/index.json"
+  "$schema": "https://cdn.jsdelivr.net/gh/labex-labs/schema/index.json"
 }
 ```
 
@@ -34,7 +34,7 @@ The `course.json` schema defines the structure for course configurations, includ
 
 ```json
 {
-  "$schema": "https://cdn.jsdelivr.net/npm/@labex-labs/schema/course.json"
+  "$schema": "https://cdn.jsdelivr.net/gh/labex-labs/schema/course.json"
 }
 ```
 
