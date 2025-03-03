@@ -1,6 +1,6 @@
 {
   "name": "@labex-labs/schema",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "JSON Schema definitions for LabEx lab and course configurations",
   "main": "index.json",
   "files": [
