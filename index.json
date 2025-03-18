@@ -15,10 +15,7 @@
   "properties": {
     "type": {
       "type": "string",
-      "enum": [
-        "lab",
-        "challenge"
-      ]
+      "enum": ["lab", "challenge"]
     },
     "title": {
       "type": "string",
@@ -30,11 +27,7 @@
     },
     "meta": {
       "type": "object",
-      "required": [
-        "title",
-        "description",
-        "keywords"
-      ],
+      "required": ["title", "description", "keywords"],
       "properties": {
         "title": {
           "type": "string",
@@ -52,11 +45,7 @@
     },
     "difficulty": {
       "type": "string",
-      "enum": [
-        "Beginner",
-        "Intermediate",
-        "Advanced"
-      ],
+      "enum": ["Beginner", "Intermediate", "Advanced"],
       "description": "Difficulty level of the lab"
     },
     "time": {
@@ -70,10 +59,7 @@
     },
     "fee_type": {
       "type": "string",
-      "enum": [
-        "free",
-        "pro"
-      ],
+      "enum": ["free", "pro"],
       "description": "Fee type"
     },
     "show_in_tutorial": {
@@ -92,22 +78,13 @@
     },
     "details": {
       "type": "object",
-      "required": [
-        "steps",
-        "intro",
-        "finish"
-      ],
+      "required": ["steps", "intro", "finish"],
       "properties": {
         "steps": {
           "type": "array",
           "items": {
             "type": "object",
-            "required": [
-              "title",
-              "text",
-              "verify",
-              "skills"
-            ],
+            "required": ["title", "text", "verify", "skills"],
             "allOf": [
               {
                 "if": {
@@ -116,14 +93,10 @@
                       "const": "challenge"
                     }
                   },
-                  "required": [
-                    "$lab_type"
-                  ]
+                  "required": ["$lab_type"]
                 },
                 "then": {
-                  "required": [
-                    "solutions"
-                  ]
+                  "required": ["solutions"]
                 }
               }
             ],
@@ -141,11 +114,7 @@
                 "type": "array",
                 "items": {
                   "type": "object",
-                  "required": [
-                    "name",
-                    "file",
-                    "hint"
-                  ],
+                  "required": ["name", "file", "hint"],
                   "properties": {
                     "name": {
                       "type": "string",
@@ -193,9 +162,7 @@
         },
         "intro": {
           "type": "object",
-          "required": [
-            "text"
-          ],
+          "required": ["text"],
           "properties": {
             "text": {
               "type": "string",
@@ -204,25 +171,19 @@
             },
             "title": {
               "type": "string",
-              "enum": [
-                "Introduction"
-              ],
+              "enum": ["Introduction"],
               "description": "Introduction title, use Title Case"
             },
             "background": {
               "type": "string",
-              "enum": [
-                "setup.sh"
-              ],
+              "enum": ["setup.sh"],
               "description": "Path to background setup script, must be setup.sh"
             }
           }
         },
         "finish": {
           "type": "object",
-          "required": [
-            "text"
-          ],
+          "required": ["text"],
           "properties": {
             "text": {
               "type": "string",
@@ -231,9 +192,7 @@
             },
             "title": {
               "type": "string",
-              "enum": [
-                "Summary"
-              ],
+              "enum": ["Summary"],
               "description": "Summary title, use Title Case"
             }
           }
@@ -246,10 +205,7 @@
               "type": "array",
               "items": {
                 "type": "object",
-                "required": [
-                  "file",
-                  "target"
-                ],
+                "required": ["file", "target"],
                 "properties": {
                   "file": {
                     "type": "string",
@@ -272,9 +228,7 @@
     },
     "backend": {
       "type": "object",
-      "required": [
-        "imageid"
-      ],
+      "required": ["imageid"],
       "properties": {
         "imageid": {
           "type": "string",
@@ -335,24 +289,11 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": [
-          "lang",
-          "title",
-          "description",
-          "meta",
-          "details"
-        ],
+        "required": ["lang", "title", "description", "meta", "details"],
         "properties": {
           "lang": {
             "type": "string",
-            "enum": [
-              "zh",
-              "es",
-              "fr",
-              "de",
-              "ja",
-              "ru"
-            ],
+            "enum": ["zh", "es", "fr", "de", "ja", "ru"],
             "description": "Language code"
           },
           "title": {
@@ -365,11 +306,7 @@
           },
           "meta": {
             "type": "object",
-            "required": [
-              "title",
-              "description",
-              "keywords"
-            ],
+            "required": ["title", "description", "keywords"],
             "properties": {
               "title": {
                 "type": "string",
@@ -387,21 +324,13 @@
           },
           "details": {
             "type": "object",
-            "required": [
-              "steps",
-              "intro",
-              "finish"
-            ],
+            "required": ["steps", "intro", "finish"],
             "properties": {
               "steps": {
                 "type": "array",
                 "items": {
                   "type": "object",
-                  "required": [
-                    "title",
-                    "text",
-                    "verify"
-                  ],
+                  "required": ["title", "text", "verify"],
                   "allOf": [
                     {
                       "if": {
@@ -410,14 +339,10 @@
                             "const": "challenge"
                           }
                         },
-                        "required": [
-                          "$lab_type"
-                        ]
+                        "required": ["$lab_type"]
                       },
                       "then": {
-                        "required": [
-                          "solutions"
-                        ]
+                        "required": ["solutions"]
                       }
                     }
                   ],
@@ -435,11 +360,7 @@
                       "type": "array",
                       "items": {
                         "type": "object",
-                        "required": [
-                          "name",
-                          "file",
-                          "hint"
-                        ],
+                        "required": ["name", "file", "hint"],
                         "properties": {
                           "name": {
                             "type": "string",
@@ -469,10 +390,7 @@
               },
               "intro": {
                 "type": "object",
-                "required": [
-                  "text",
-                  "title"
-                ],
+                "required": ["text", "title"],
                 "properties": {
                   "text": {
                     "type": "string",
@@ -495,10 +413,7 @@
               },
               "finish": {
                 "type": "object",
-                "required": [
-                  "text",
-                  "title"
-                ],
+                "required": ["text", "title"],
                 "properties": {
                   "text": {
                     "type": "string",
