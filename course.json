@@ -111,7 +111,8 @@
         "mongodb",
         "web-development",
         "nmap",
-        "wireshark"
+        "wireshark",
+        "hydra"
       ],
       "description": "Associated skill tree identifier"
     },
