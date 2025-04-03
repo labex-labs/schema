@@ -109,6 +109,8 @@
         "hadoop",
         "cybersecurity",
         "mongodb",
+        "redis",
+        "postgresql",
         "web-development",
         "nmap",
         "wireshark",
