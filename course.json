@@ -114,7 +114,8 @@
         "web-development",
         "nmap",
         "wireshark",
-        "hydra"
+        "hydra",
+        "kali"
       ],
       "description": "Associated skill tree identifier"
     },
