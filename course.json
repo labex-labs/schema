@@ -115,7 +115,8 @@
         "nmap",
         "wireshark",
         "hydra",
-        "kali"
+        "kali",
+        "sqlite"
       ],
       "description": "Associated skill tree identifier"
     },
