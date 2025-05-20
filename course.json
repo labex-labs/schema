@@ -211,7 +211,7 @@
         "properties": {
           "lang": {
             "type": "string",
-            "enum": ["zh", "es", "fr", "de", "ja", "ru"],
+            "enum": ["zh", "es", "fr", "de", "ja", "ru", "ko", "pt"],
             "description": "Language code"
           },
           "name": {
