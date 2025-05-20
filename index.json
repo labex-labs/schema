@@ -405,7 +405,9 @@
                       "Introduction",
                       "Einführung",
                       "はじめに",
-                      "Введение"
+                      "Введение",
+                      "소개",
+                      "Introdução"
                     ],
                     "description": "Localized introduction title, use Title Case"
                   }
@@ -428,7 +430,9 @@
                       "Résumé",
                       "Zusammenfassung",
                       "まとめ",
-                      "Резюме"
+                      "Резюме",
+                      "요약",
+                      "Resumo"
                     ],
                     "description": "Localized summary title, use Title Case"
                   }
