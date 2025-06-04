@@ -242,7 +242,7 @@
             "vnc-instance-ubuntu-kali:2204",
             "webide-instance-ubuntu:2204",
             "vnc-instance-ubuntu-jenkins:2204",
-            "rhcsa-ubi9",
+            "ubi9",
             "vnc-instance-ubuntu-docker:2204",
             "claude",
             "desktop-start"
