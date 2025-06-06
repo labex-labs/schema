@@ -235,6 +235,8 @@
           "enum": [
             "vnc-ubuntu:2204",
             "webide-ubuntu:2204",
+            "ttdy-ubuntu:2204",
+            "ttdy-instance-ubuntu:2204",
             "jupyter-ubuntu:2204",
             "vnc-instance-ubuntu:2204",
             "vnc-instance-ubuntu-bigdata:2204",
@@ -242,7 +244,7 @@
             "vnc-instance-ubuntu-kali:2204",
             "webide-instance-ubuntu:2204",
             "vnc-instance-ubuntu-jenkins:2204",
-            "ubi9",
+            "ttyd-ubi9",
             "vnc-instance-ubuntu-docker:2204",
             "claude",
             "desktop-start"
