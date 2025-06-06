@@ -235,8 +235,8 @@
           "enum": [
             "vnc-ubuntu:2204",
             "webide-ubuntu:2204",
-            "ttdy-ubuntu:2204",
-            "ttdy-instance-ubuntu:2204",
+            "ttyd-ubuntu:2204",
+            "ttyd-instance-ubuntu:2204",
             "jupyter-ubuntu:2204",
             "vnc-instance-ubuntu:2204",
             "vnc-instance-ubuntu-bigdata:2204",
