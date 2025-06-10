@@ -72,6 +72,11 @@
       "default": false,
       "description": "Whether the lab is verified"
     },
+    "ai_verify": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable AI Deep Inspection feature by default when true, skipping verify scripts"
+    },
     "alias": {
       "type": "string",
       "description": "Alias of the lab, if configured, the lab will be redirected to the alias"
