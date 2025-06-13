@@ -250,6 +250,7 @@
             "webide-instance-ubuntu:2204",
             "vnc-instance-ubuntu-jenkins:2204",
             "ttyd-ubi9",
+            "ttyd-instance-ubi9",
             "vnc-instance-ubuntu-docker:2204",
             "claude",
             "desktop-start"
