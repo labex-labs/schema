@@ -57,6 +57,11 @@
       "default": false,
       "description": "Whether to hide in the list"
     },
+    "ai_verify": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable AI Deep Inspection feature by default when true, skipping verify scripts"
+    },
     "fee_type": {
       "type": "string",
       "enum": ["free", "pro"],
@@ -71,11 +76,6 @@
       "type": "boolean",
       "default": false,
       "description": "Whether the lab is verified"
-    },
-    "ai_verify": {
-      "type": "boolean",
-      "default": false,
-      "description": "Enable AI Deep Inspection feature by default when true, skipping verify scripts"
     },
     "alias": {
       "type": "string",
