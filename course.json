@@ -117,7 +117,8 @@
         "hydra",
         "kali",
         "sqlite",
-        "rhel"
+        "rhel",
+        "comptia"
       ],
       "description": "Associated skill tree identifier"
     },
