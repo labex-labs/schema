@@ -253,7 +253,8 @@
             "ttyd-instance-ubi9",
             "vnc-instance-ubuntu-docker:2204",
             "claude",
-            "desktop-start"
+            "desktop-start",
+            "webide-ubuntu-react:2204"
           ],
           "description": "Docker image ID used by backend, make sure the image is in the image list"
         },
