@@ -118,7 +118,8 @@
         "kali",
         "sqlite",
         "rhel",
-        "comptia"
+        "comptia",
+        "devops"
       ],
       "description": "Associated skill tree identifier"
     },
