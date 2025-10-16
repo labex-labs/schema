@@ -17,6 +17,10 @@
       "type": "string",
       "description": "Lab ID from LabEx backend"
     },
+    "alias": {
+      "type": "string",
+      "description": "Alias of the lab, if configured, the lab will be redirected to the alias"
+    },
     "type": {
       "type": "string",
       "enum": ["lab", "challenge"]
@@ -80,10 +84,6 @@
       "type": "boolean",
       "default": false,
       "description": "Whether the lab is verified"
-    },
-    "alias": {
-      "type": "string",
-      "description": "Alias of the lab, if configured, the lab will be redirected to the alias"
     },
     "details": {
       "type": "object",
