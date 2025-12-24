@@ -246,6 +246,7 @@
             "webide-ubuntu:2204",
             "ttyd-ubuntu:2204",
             "ttyd-ubuntu-training:2204",
+            "ttyd-instance-ubuntu-training:2204",
             "ttyd-instance-ubuntu:2204",
             "jupyter-ubuntu:2204",
             "vnc-instance-ubuntu:2204",
