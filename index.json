@@ -267,6 +267,52 @@
           "type": "boolean",
           "default": false,
           "description": "Whether to enable network access"
+        },
+        "services": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": ["type", "name", "port"],
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": ["iframe"],
+                    "description": "Service type"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Service name"
+                  },
+                  "port": {
+                    "type": "integer",
+                    "description": "Service port number"
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "required": ["type", "name", "src"],
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": ["iframe"],
+                    "description": "Service type"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Service name"
+                  },
+                  "src": {
+                    "type": "string",
+                    "description": "Service source URL"
+                  }
+                }
+              }
+            ]
+          },
+          "description": "List of backend services"
         }
       }
     },
