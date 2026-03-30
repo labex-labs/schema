@@ -30,7 +30,11 @@
     },
     "meta": {
       "type": "object",
-      "required": ["title", "description", "keywords"],
+      "required": [
+        "title",
+        "description",
+        "keywords"
+      ],
       "properties": {
         "title": {
           "type": "string",
@@ -52,7 +56,11 @@
     },
     "level": {
       "type": "string",
-      "enum": ["Beginner", "Intermediate", "Advanced"],
+      "enum": [
+        "Beginner",
+        "Intermediate",
+        "Advanced"
+      ],
       "description": "Difficulty level of the course"
     },
     "alias": {
@@ -129,13 +137,20 @@
     },
     "type": {
       "type": "string",
-      "enum": ["normal", "project"],
+      "enum": [
+        "normal",
+        "project"
+      ],
       "description": "Course type"
     },
     "fee_type": {
       "type": "string",
-      "enum": ["free", "pro"],
-      "description": "Fee type"
+      "default": "free",
+      "enum": [
+        "free",
+        "pro"
+      ],
+      "description": "Fee type, default is free"
     },
     "lab_coins": {
       "type": "integer",
@@ -169,7 +184,9 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["path"],
+        "required": [
+          "path"
+        ],
         "properties": {
           "path": {
             "type": "string",
@@ -183,7 +200,10 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["name", "labs"],
+        "required": [
+          "name",
+          "labs"
+        ],
         "properties": {
           "name": {
             "type": "string",
@@ -193,7 +213,9 @@
             "type": "array",
             "items": {
               "type": "object",
-              "required": ["path"],
+              "required": [
+                "path"
+              ],
               "properties": {
                 "path": {
                   "type": "string",
@@ -210,11 +232,27 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["lang", "name", "description", "meta", "cover", "intro"],
+        "required": [
+          "lang",
+          "name",
+          "description",
+          "meta",
+          "cover",
+          "intro"
+        ],
         "properties": {
           "lang": {
             "type": "string",
-            "enum": ["zh", "es", "fr", "de", "ja", "ru", "ko", "pt"],
+            "enum": [
+              "zh",
+              "es",
+              "fr",
+              "de",
+              "ja",
+              "ru",
+              "ko",
+              "pt"
+            ],
             "description": "Language code"
           },
           "name": {
@@ -227,7 +265,11 @@
           },
           "meta": {
             "type": "object",
-            "required": ["title", "description", "keywords"],
+            "required": [
+              "title",
+              "description",
+              "keywords"
+            ],
             "properties": {
               "title": {
                 "type": "string",
@@ -257,10 +299,14 @@
   },
   "oneOf": [
     {
-      "required": ["labs"]
+      "required": [
+        "labs"
+      ]
     },
     {
-      "required": ["stages"]
+      "required": [
+        "stages"
+      ]
     }
   ]
 }
