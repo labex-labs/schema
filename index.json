@@ -255,8 +255,10 @@
             "vnc-instance-ubuntu-kali:2204",
             "webide-instance-ubuntu:2204",
             "vnc-instance-ubuntu-jenkins:2204",
+            "ttyd-instance-ubuntu-cka:2204",
             "ttyd-ubi9",
             "ttyd-instance-ubi9",
+            "ttyd-instance-rhel10",
             "claude",
             "desktop-start",
             "webide-ubuntu-react:2204"
