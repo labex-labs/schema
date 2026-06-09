@@ -292,6 +292,22 @@
           "intro": {
             "type": "string",
             "description": "Path to localized introduction content file"
+          },
+          "stages": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "name"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Localized stage name"
+                }
+              }
+            },
+            "description": "Localized stage names in the same order as top-level stages"
           }
         }
       }
