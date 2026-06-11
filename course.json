@@ -188,6 +188,11 @@
       "default": false,
       "description": "Whether to show step names"
     },
+    "show_day_label": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to show day label before the lab name in course page"
+    },
     "intro": {
       "type": "string",
       "description": "Path to introduction content Markdown file"
