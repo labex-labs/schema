@@ -159,6 +159,14 @@
                 },
                 "description": "Related skill tags, make sure the skill tags are in the skill list"
               },
+              "skills_v2": {
+                "type": "array",
+                "default": [],
+                "items": {
+                  "type": "string"
+                },
+                "description": "Related skill tags from the skilltree API v2"
+              },
               "solutions": {
                 "type": "array",
                 "items": {
@@ -255,13 +263,13 @@
             "vnc-instance-ubuntu-kali:2204",
             "webide-instance-ubuntu:2204",
             "vnc-instance-ubuntu-jenkins:2204",
-            "ttyd-instance-ubuntu-cka:2204",
             "ttyd-ubi9",
             "ttyd-instance-ubi9",
-            "ttyd-instance-rhel10",
             "claude",
             "desktop-start",
-            "webide-ubuntu-react:2204"
+            "webide-ubuntu-react:2204",
+            "ttyd-instance-ubuntu-cka:2204",
+            "ttyd-instance-rhel10"
           ],
           "description": "Docker image ID used by backend, make sure the image is in the image list"
         },
@@ -436,6 +444,16 @@
                           "hint": {
                             "type": "string",
                             "description": "Localized verification failure hint"
+                          },
+                          "timeout": {
+                            "type": "integer",
+                            "default": 0,
+                            "description": "Verification timeout in seconds"
+                          },
+                          "showstderr": {
+                            "type": "boolean",
+                            "default": false,
+                            "description": "Whether to show stderr output"
                           }
                         }
                       }
