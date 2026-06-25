@@ -93,7 +93,7 @@
           "type": "array",
           "items": {
             "type": "object",
-            "required": ["title", "text", "verify", "skills"],
+            "required": ["title", "text", "verify", "skills_v2"],
             "allOf": [
               {
                 "if": {
