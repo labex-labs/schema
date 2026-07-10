@@ -151,14 +151,6 @@
                   }
                 }
               },
-              "skills": {
-                "type": "array",
-                "default": [],
-                "items": {
-                  "type": "string"
-                },
-                "description": "Related skill tags, make sure the skill tags are in the skill list"
-              },
               "skills_v2": {
                 "type": "array",
                 "default": [],
