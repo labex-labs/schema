@@ -139,7 +139,8 @@
         "comptia",
         "devops",
         "devops-engineer",
-        "devsecops"
+        "devsecops",
+        "cloudflare"
       ],
       "description": "Associated skill tree identifier"
     },
