@@ -140,7 +140,8 @@
         "devops",
         "devops-engineer",
         "devsecops",
-        "cloudflare"
+        "cloudflare",
+        "aws"
       ],
       "description": "Associated skill tree identifier"
     },
