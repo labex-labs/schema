@@ -20,6 +20,11 @@
     "intro"
   ],
   "properties": {
+    "id": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "LabEx course ID, synchronized from the API"
+    },
     "name": {
       "type": "string",
       "description": "English title of the course, Use Title Case"
