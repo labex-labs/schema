@@ -10,7 +10,7 @@ The `index.json` schema defines the structure for individual lab configurations,
 
 - Basic lab information (title, description, difficulty)
 - Lab steps and verification rules
-- Backend configuration
+- Backend configuration (including `ttyd-instance-ubuntu-ansible:2204` for Ubuntu-based Ansible labs)
 - Internationalization (i18n) support
 - Metadata for SEO
 - License and contributor information

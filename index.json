@@ -253,6 +253,7 @@
             "jupyter-ubuntu:2204",
             "vnc-instance-ubuntu:2204",
             "ttyd-instance-ubuntu-bigdata:2204",
+            "ttyd-instance-ubuntu-ansible:2204",
             "vnc-ubuntu-privileged:2204",
             "vnc-instance-ubuntu-kali:2204",
             "webide-instance-ubuntu:2204",
