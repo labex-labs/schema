@@ -249,6 +249,7 @@
             "ttyd-ubuntu-training:2204",
             "ttyd-instance-ubuntu-training:2204",
             "ttyd-instance-ubuntu:2204",
+            "ttyd-instance-ubuntu-no-service:2204",
             "ttyd-instance-ubuntu-aws:2204",
             "jupyter-ubuntu:2204",
             "vnc-instance-ubuntu:2204",
@@ -314,6 +315,16 @@
                     "description": "Service source URL"
                   }
                 }
+              },
+              {
+                "type": "object",
+                "required": ["type"],
+                "properties": {
+                  "type": { "type": "string", "enum": ["ttyd"] },
+                  "name": { "type": "string", "description": "Terminal tab name" },
+                  "command": { "type": "string", "description": "Command executed in the terminal session before learner actions" }
+                },
+                "additionalProperties": false
               }
             ]
           },
