@@ -15,11 +15,11 @@
   "properties": {
     "id": {
       "type": "string",
-      "description": "Lab ID from LabEx backend"
+      "description": "System-assigned Lab ID from the backend. Omit for new labs and preserve existing values."
     },
     "alias": {
       "type": "string",
-      "description": "Alias of the lab, if configured, the lab will be redirected to the alias"
+      "description": "System-assigned Lab route alias. Omit for new labs and preserve existing values."
     },
     "type": {
       "type": "string",
@@ -58,6 +58,7 @@
     },
     "time": {
       "type": "integer",
+      "minimum": 0,
       "description": "Estimated completion time (in minutes)"
     },
     "hidden": {
@@ -78,7 +79,7 @@
     "show_in_tutorial": {
       "type": "boolean",
       "default": false,
-      "description": "Whether to show in tutorials"
+      "description": "Whether to publish the Tutorial page; independent of VM practice availability."
     },
     "verified": {
       "type": "boolean",
@@ -94,21 +95,6 @@
           "items": {
             "type": "object",
             "required": ["title", "text", "verify", "skills_v2"],
-            "allOf": [
-              {
-                "if": {
-                  "properties": {
-                    "$lab_type": {
-                      "const": "challenge"
-                    }
-                  },
-                  "required": ["$lab_type"]
-                },
-                "then": {
-                  "required": ["solutions"]
-                }
-              }
-            ],
             "properties": {
               "title": {
                 "type": "string",
@@ -116,7 +102,7 @@
               },
               "text": {
                 "type": "string",
-                "pattern": "^(en/)?step[1-9][0-9]*.md$",
+                "pattern": "^(en/)?step[1-9][0-9]*\\.md$",
                 "description": "Path to the step content Markdown file. Use 'step1.md' if no i18n exists, or 'en/step1.md' if i18n exists"
               },
               "verify": {
@@ -131,7 +117,7 @@
                     },
                     "file": {
                       "type": "string",
-                      "pattern": "^verify[1-9][0-9]*-[1-9][0-9]*.sh$",
+                      "pattern": "^verify[1-9][0-9]*-[1-9][0-9]*\\.sh$",
                       "description": "Path to verification script, must follow pattern: verify1-1.sh, verify1-2.sh, etc."
                     },
                     "hint": {
@@ -140,6 +126,7 @@
                     },
                     "timeout": {
                       "type": "integer",
+                      "minimum": 0,
                       "default": 0,
                       "description": "Verification timeout in seconds"
                     },
@@ -154,15 +141,19 @@
               "skills_v2": {
                 "type": "array",
                 "default": [],
+                "uniqueItems": true,
                 "items": {
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 1
                 },
-                "description": "Related skill tags from the skilltree API v2"
+                "description": "Concept-level Skill Trees V2 keys for this main-language step, not course tags or path aliases. Empty arrays are allowed; catalog membership is checked by the offline binding workflow."
               },
+              "skills": false,
               "solutions": {
                 "type": "array",
                 "items": {
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 1
                 },
                 "description": "List of paths to solution Markdown files, use relative path"
               }
@@ -175,7 +166,7 @@
           "properties": {
             "text": {
               "type": "string",
-              "pattern": "^(en/)?intro.md$",
+              "pattern": "^(en/)?intro\\.md$",
               "description": "Path to introduction content Markdown file. Use 'intro.md' if no i18n exists, or 'en/intro.md' if i18n exists"
             },
             "title": {
@@ -196,7 +187,7 @@
           "properties": {
             "text": {
               "type": "string",
-              "pattern": "^(en/)?finish.md$",
+              "pattern": "^(en/)?finish\\.md$",
               "description": "Path to summary content Markdown file. Use 'finish.md' if no i18n exists, or 'en/finish.md' if i18n exists"
             },
             "title": {
@@ -241,33 +232,9 @@
       "properties": {
         "imageid": {
           "type": "string",
-          "enum": [
-            "vnc-ubuntu:2204",
-            "webide-ubuntu:2204",
-            "ttyd-ubuntu:2204",
-            "ttyd-ubuntu-aws:2204",
-            "ttyd-ubuntu-training:2204",
-            "ttyd-instance-ubuntu-training:2204",
-            "ttyd-instance-ubuntu:2204",
-            "ttyd-instance-ubuntu-no-service:2204",
-            "ttyd-instance-ubuntu-aws:2204",
-            "jupyter-ubuntu:2204",
-            "vnc-instance-ubuntu:2204",
-            "ttyd-instance-ubuntu-bigdata:2204",
-            "ttyd-instance-ubuntu-ansible:2204",
-            "vnc-ubuntu-privileged:2204",
-            "vnc-instance-ubuntu-kali:2204",
-            "webide-instance-ubuntu:2204",
-            "vnc-instance-ubuntu-jenkins:2204",
-            "ttyd-ubi9",
-            "ttyd-instance-ubi9",
-            "claude",
-            "desktop-start",
-            "webide-ubuntu-react:2204",
-            "ttyd-instance-ubuntu-cka:2204",
-            "ttyd-instance-rhel10"
-          ],
-          "description": "Docker image ID used by backend, make sure the image is in the image list"
+          "minLength": 1,
+          "not": { "pattern": "\\s" },
+          "description": "Backend environment image identifier. Accept any nonempty identifier without whitespace; availability is checked by the deployment platform or VM tooling."
         },
         "open_network": {
           "type": "boolean",
@@ -281,6 +248,7 @@
               {
                 "type": "object",
                 "required": ["type", "name", "port"],
+                "not": { "required": ["src"] },
                 "properties": {
                   "type": {
                     "type": "string",
@@ -293,6 +261,8 @@
                   },
                   "port": {
                     "type": "integer",
+                    "minimum": 1,
+                    "maximum": 65535,
                     "description": "Service port number"
                   }
                 }
@@ -300,6 +270,7 @@
               {
                 "type": "object",
                 "required": ["type", "name", "src"],
+                "not": { "required": ["port"] },
                 "properties": {
                   "type": {
                     "type": "string",
@@ -312,6 +283,7 @@
                   },
                   "src": {
                     "type": "string",
+                    "minLength": 1,
                     "description": "Service source URL"
                   }
                 }
@@ -407,21 +379,6 @@
                 "items": {
                   "type": "object",
                   "required": ["title", "text", "verify"],
-                  "allOf": [
-                    {
-                      "if": {
-                        "properties": {
-                          "$lab_type": {
-                            "const": "challenge"
-                          }
-                        },
-                        "required": ["$lab_type"]
-                      },
-                      "then": {
-                        "required": ["solutions"]
-                      }
-                    }
-                  ],
                   "properties": {
                     "title": {
                       "type": "string",
@@ -429,7 +386,7 @@
                     },
                     "text": {
                       "type": "string",
-                      "pattern": "^[a-z]{2}/step[1-9][0-9]*.md$",
+                      "pattern": "^[a-z]{2}/step[1-9][0-9]*\\.md$",
                       "description": "Localized step content file path, must follow pattern: {lang}/step1.md (e.g., zh/step1.md)"
                     },
                     "verify": {
@@ -444,7 +401,7 @@
                           },
                           "file": {
                             "type": "string",
-                            "pattern": "^verify[1-9][0-9]*-[1-9][0-9]*.sh$",
+                            "pattern": "^verify[1-9][0-9]*-[1-9][0-9]*\\.sh$",
                             "description": "Path to verification script, must follow pattern: verify1-1.sh, verify1-2.sh, etc."
                           },
                           "hint": {
@@ -453,6 +410,7 @@
                           },
                           "timeout": {
                             "type": "integer",
+                            "minimum": 0,
                             "default": 0,
                             "description": "Verification timeout in seconds"
                           },
@@ -464,10 +422,12 @@
                         }
                       }
                     },
+                    "skills": false,
                     "solutions": {
                       "type": "array",
                       "items": {
-                        "type": "string"
+                        "type": "string",
+                        "minLength": 1
                       },
                       "description": "List of paths to localized solution Markdown files, use relative path"
                     }
@@ -480,7 +440,7 @@
                 "properties": {
                   "text": {
                     "type": "string",
-                    "pattern": "^[a-z]{2}/intro.md$",
+                    "pattern": "^[a-z]{2}/intro\\.md$",
                     "description": "Localized introduction content file path, must follow pattern: {lang}/intro.md (e.g., zh/intro.md)"
                   },
                   "title": {
@@ -505,7 +465,7 @@
                 "properties": {
                   "text": {
                     "type": "string",
-                    "pattern": "^[a-z]{2}/finish.md$",
+                    "pattern": "^[a-z]{2}/finish\\.md$",
                     "description": "Localized summary content file path, must follow pattern: {lang}/finish.md (e.g., zh/finish.md)"
                   },
                   "title": {
@@ -529,5 +489,39 @@
         }
       }
     }
-  }
+  },
+  "definitions": {
+    "challengeDetails": {
+      "properties": {
+        "steps": {
+          "items": {
+            "required": ["solutions"],
+            "properties": {
+              "solutions": { "minItems": 1 }
+            }
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "type": { "const": "challenge" } },
+        "required": ["type"]
+      },
+      "then": {
+        "properties": {
+          "details": { "$ref": "#/definitions/challengeDetails" },
+          "i18n": {
+            "items": {
+              "properties": {
+                "details": { "$ref": "#/definitions/challengeDetails" }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
 }

@@ -23,15 +23,15 @@
     "id": {
       "type": "integer",
       "minimum": 1,
-      "description": "LabEx course ID, synchronized from the API"
+      "description": "System-assigned LabEx course ID. Omit for a new course until assigned by the backend; preserve the ID of an existing course."
     },
     "name": {
       "type": "string",
-      "description": "English title of the course, Use Title Case"
+      "description": "Learner-facing English course title. Use Title Case while preserving technical names and abbreviations."
     },
     "description": {
       "type": "string",
-      "description": "Brief English description of the course"
+      "description": "Short English summary of the course subject, intended audience, and outcomes supported by its Labs."
     },
     "meta": {
       "type": "object",
@@ -43,21 +43,22 @@
       "properties": {
         "title": {
           "type": "string",
-          "description": "English SEO title of the course"
+          "description": "English SEO title used for the course page in search results."
         },
         "description": {
           "type": "string",
-          "description": "English SEO description of the course"
+          "description": "English search-result summary describing the course’s actual scope and learning outcomes."
         },
         "keywords": {
           "type": "string",
-          "description": "English SEO keywords of the course, separated by commas"
+          "description": "Relevant English SEO keywords as one comma-separated string, not an array or the course tags field."
         }
-      }
+      },
+      "description": "English search-engine metadata for the course page, aligned with the actual course content."
     },
     "cover": {
       "type": "string",
-      "description": "URL of the course cover image"
+      "description": "URL of the English course cover image. Follow the established course-cover repository URL convention."
     },
     "level": {
       "type": "string",
@@ -66,94 +67,101 @@
         "Intermediate",
         "Advanced"
       ],
-      "description": "Difficulty level of the course"
+      "description": "Difficulty of the course as a whole: Beginner, Intermediate, or Advanced. Choose according to its prerequisites and learning tasks."
     },
     "alias": {
       "type": "array",
       "items": {
         "type": "string",
-        "pattern": "^[a-z-0-9]+$",
-        "description": "URL alias (lowercase letters, hyphens, and numbers only)"
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "description": "A course route alias containing lowercase letters and digits separated by single hyphens; no leading or trailing hyphen."
       },
-      "description": "List of URL aliases for the course"
+      "description": "Unique course URL aliases in lowercase kebab-case. Preserve existing aliases when adding or changing routes so established links remain valid.",
+      "minItems": 1,
+      "uniqueItems": true
     },
     "tags": {
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "string",
+        "minLength": 1
       },
-      "description": "List of technology tags"
+      "description": "Distinct technology and domain labels supported by substantial course content. Public courses must use public learning path aliases; hidden courses may retain historical technology tags. Do not add labels solely for the runtime environment or assumed prerequisites.",
+      "minItems": 1,
+      "uniqueItems": true
     },
     "skill_tree": {
       "type": "string",
       "enum": [
-        "rust",
-        "go",
-        "sklearn",
-        "mysql",
-        "git",
-        "pygame",
-        "cpp",
-        "sql",
-        "opencv",
-        "alibabacloud",
-        "python",
-        "pandas",
-        "javascript",
-        "linux",
         "algorithm",
-        "ml",
-        "data-science",
-        "tkinter",
-        "matplotlib",
-        "css",
-        "shell",
-        "java",
-        "html",
-        "flask",
-        "react",
+        "alibabacloud",
         "ansible",
-        "rhce-ansible",
-        "jquery",
-        "django",
+        "aws",
+        "bigdata",
         "c",
-        "docker",
-        "jenkins",
-        "numpy",
-        "kubernetes",
         "cka",
         "ckad",
         "cks",
-        "hadoop",
-        "bigdata",
+        "cloudflare",
+        "comptia",
+        "cpp",
+        "css",
         "cybersecurity",
         "cybersecurity-engineer",
-        "mongodb",
-        "redis",
-        "postgresql",
+        "data-science",
         "database",
-        "web-development",
-        "nmap",
-        "wireshark",
-        "hydra",
-        "kali",
-        "sqlite",
-        "rhel",
-        "rhcsa",
-        "rhce-enterprise-linux",
-        "lfcs",
-        "comptia",
         "devops",
         "devops-engineer",
         "devsecops",
-        "cloudflare",
-        "aws"
+        "django",
+        "docker",
+        "flask",
+        "git",
+        "go",
+        "hadoop",
+        "html",
+        "hydra",
+        "java",
+        "javascript",
+        "jenkins",
+        "jquery",
+        "kali",
+        "kubernetes",
+        "lfcs",
+        "linux",
+        "linux-engineer",
+        "matplotlib",
+        "ml",
+        "mongodb",
+        "mysql",
+        "networking",
+        "nmap",
+        "numpy",
+        "opencv",
+        "pandas",
+        "postgresql",
+        "pygame",
+        "python",
+        "react",
+        "redis",
+        "rhce-ansible",
+        "rhce-enterprise-linux",
+        "rhcsa",
+        "rhel",
+        "rust",
+        "shell",
+        "sklearn",
+        "sql",
+        "sqlite",
+        "tkinter",
+        "web-development",
+        "wireshark"
       ],
-      "description": "Associated skill tree identifier"
+      "description": "Primary learning path alias for the course. Public courses must use a public path alias; hidden courses may retain known historical hidden path aliases. Path membership is configured separately through the path’s levels[].courses IDs."
     },
     "priority": {
       "type": "integer",
-      "description": "Course priority/order in listings"
+      "description": "Course display priority in listings; larger values appear earlier."
     },
     "type": {
       "type": "string",
@@ -161,7 +169,7 @@
         "normal",
         "project"
       ],
-      "description": "Course type"
+      "description": "Course format: normal for structured teaching, topic-based practice collections, and exams; project for integrated project work. Classify by learning purpose, not directory name, number of Labs, or challenge-only composition."
     },
     "fee_type": {
       "type": "string",
@@ -170,40 +178,41 @@
         "free",
         "pro"
       ],
-      "description": "Fee type, default is free"
+      "description": "Course-level access tier: free or pro; default is free. Referenced Labs have their own independent fee_type settings."
     },
     "lab_coins": {
       "type": "integer",
-      "description": "Cost in lab coins"
+      "description": "Nonnegative course price in LabEx lab coins; applicable when fee_type is pro.",
+      "minimum": 0
     },
     "is_orderly": {
       "type": "boolean",
       "default": false,
-      "description": "Whether labs must be completed in order"
+      "description": "Whether learners must complete the course Labs in their configured order; default is false."
     },
     "hidden": {
       "type": "boolean",
       "default": false,
-      "description": "Whether to hide in the list"
+      "description": "Course visibility: true marks a hidden course and false marks a public course; default is false. This does not change the visibility of referenced Labs."
     },
     "has_cert": {
       "type": "boolean",
       "default": false,
-      "description": "Whether course offers certification"
+      "description": "Whether the course offers a LabEx course certificate; default is false."
     },
     "show_step_name": {
       "type": "boolean",
       "default": false,
-      "description": "Whether to show step names"
+      "description": "Whether to display Lab step names for this course; default is false."
     },
     "show_day_label": {
       "type": "boolean",
       "default": false,
-      "description": "Whether to show day label before the lab name in course page"
+      "description": "Whether to prefix Lab names with day labels on the course page, as in X Days courses; default is false."
     },
     "intro": {
       "type": "string",
-      "description": "Path to introduction content Markdown file"
+      "description": "Path to the English Markdown course introduction, relative to the directory containing course.json; normally intro.md."
     },
     "labs": {
       "type": "array",
@@ -216,10 +225,12 @@
           "path": {
             "type": "string",
             "pattern": "^[\\w-]+/[\\w-]+:[\\w/-]+$",
-            "description": "Path to the lab in format 'organization/repository:path/to/lab'"
+            "description": "Lab reference in organization/repository:repository-relative/path format, resolved to the Lab directory containing index.json. Use a repository path, not a numeric Lab ID."
           }
         }
-      }
+      },
+      "uniqueItems": true,
+      "description": "Ordered Lab and Challenge references for a course without named stages. Specify exactly one of labs or stages."
     },
     "stages": {
       "type": "array",
@@ -232,7 +243,7 @@
         "properties": {
           "name": {
             "type": "string",
-            "description": "Name of the stage"
+            "description": "English name of this stage, displayed in the course syllabus."
           },
           "labs": {
             "type": "array",
@@ -245,13 +256,16 @@
                 "path": {
                   "type": "string",
                   "pattern": "^[\\w-]+/[\\w-]+:[\\w/-]+$",
-                  "description": "Path to the lab in format 'organization/repository:path/to/lab'"
+                  "description": "Lab reference in organization/repository:repository-relative/path format, resolved to the Lab directory containing index.json. Use a repository path, not a numeric Lab ID."
                 }
               }
-            }
+            },
+            "uniqueItems": true,
+            "description": "Ordered Lab and Challenge references belonging to this stage."
           }
         }
-      }
+      },
+      "description": "Ordered named groups of Lab and Challenge references. Use instead of labs when the course has meaningful stages; specify exactly one membership structure."
     },
     "i18n": {
       "type": "array",
@@ -278,15 +292,15 @@
               "ko",
               "pt"
             ],
-            "description": "Language code"
+            "description": "Translation language code: zh, es, fr, de, ja, ru, ko, or pt. English content belongs in the top-level course fields."
           },
           "name": {
             "type": "string",
-            "description": "Localized course name"
+            "description": "Course title translated into the language identified by lang; preserve technical product names appropriately."
           },
           "description": {
             "type": "string",
-            "description": "Localized course description"
+            "description": "Localized course summary with the same scope, audience, and outcomes as the English description."
           },
           "meta": {
             "type": "object",
@@ -298,25 +312,26 @@
             "properties": {
               "title": {
                 "type": "string",
-                "description": "Localized SEO title"
+                "description": "Localized SEO title for this language’s course page."
               },
               "description": {
                 "type": "string",
-                "description": "Localized SEO description"
+                "description": "Localized search-result summary preserving the English course’s scope and outcomes."
               },
               "keywords": {
                 "type": "string",
-                "description": "Localized SEO keywords"
+                "description": "Relevant localized SEO keywords as one comma-separated string, not an array."
               }
-            }
+            },
+            "description": "Search-engine metadata translated into the language identified by lang."
           },
           "cover": {
             "type": "string",
-            "description": "URL of localized course cover image"
+            "description": "URL of the localized course cover. Artwork may be shared with the English version; follow the established localized cover URL convention."
           },
           "intro": {
             "type": "string",
-            "description": "Path to localized introduction content file"
+            "description": "Path to this language’s Markdown course introduction, relative to the directory containing course.json; for example, intro-zh.md."
           },
           "stages": {
             "type": "array",
@@ -328,14 +343,15 @@
               "properties": {
                 "name": {
                   "type": "string",
-                  "description": "Localized stage name"
+                  "description": "Translated name of the corresponding English stage at the same array position."
                 }
               }
             },
-            "description": "Localized stage names in the same order as top-level stages"
+            "description": "Optional translated stage names corresponding positionally to top-level stages. Keep the same order and stage count; Lab membership remains in the top-level stages."
           }
         }
-      }
+      },
+      "description": "Localized course metadata and introduction references. English remains in the top-level fields; each entry describes a supported translation."
     }
   },
   "oneOf": [
@@ -348,6 +364,84 @@
       "required": [
         "stages"
       ]
+    }
+  ],
+  "$comment": "Path alias lists are maintained from labex-paths/paths/**/*.yaml, including paths/hidden/. Keep this schema and the labex-cli bundled course_schema.json identical. Public courses use public path aliases; hidden courses retain historical path associations and technology tags.",
+  "definitions": {
+    "publicPathAlias": {
+      "type": "string",
+      "enum": [
+        "ansible",
+        "aws",
+        "bigdata",
+        "c",
+        "cka",
+        "ckad",
+        "cks",
+        "cloudflare",
+        "comptia",
+        "cpp",
+        "cybersecurity",
+        "cybersecurity-engineer",
+        "data-science",
+        "database",
+        "devops",
+        "devops-engineer",
+        "devsecops",
+        "docker",
+        "git",
+        "go",
+        "hydra",
+        "java",
+        "jenkins",
+        "kali",
+        "kubernetes",
+        "lfcs",
+        "linux",
+        "mongodb",
+        "mysql",
+        "networking",
+        "nmap",
+        "postgresql",
+        "python",
+        "redis",
+        "rhce-ansible",
+        "rhce-enterprise-linux",
+        "rhcsa",
+        "rhel",
+        "rust",
+        "shell",
+        "sqlite",
+        "web-development",
+        "wireshark"
+      ],
+      "description": "Alias from a learning path configuration with is_show: true; used by public courses for skill_tree and tags."
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "hidden": {
+            "const": false
+          }
+        },
+        "required": [
+          "hidden"
+        ]
+      },
+      "then": {
+        "properties": {
+          "skill_tree": {
+            "$ref": "#/definitions/publicPathAlias"
+          },
+          "tags": {
+            "items": {
+              "$ref": "#/definitions/publicPathAlias"
+            }
+          }
+        }
+      }
     }
   ]
 }
