@@ -10,7 +10,7 @@ The `index.json` schema defines the structure for individual lab configurations,
 
 - Basic lab information (title, description, difficulty)
 - Lab steps and verification rules
-- Backend configuration, including `ttyd-instance-ubuntu-ansible:2204` and `instance-ubuntu-no-service:2204`
+- Backend configuration, including `ttyd-instance-ubuntu-ansible:2204`, `ubuntu-no-service:2204` and `instance-ubuntu-no-service:2204`
 - Explicit backend services: ttyd terminals with optional `name` and `command`, and iframe entries with `name` plus `port` or `src`
 - Internationalization (i18n) support
 - Metadata for SEO
@@ -23,6 +23,8 @@ Content and verification filenames use literal `.md` and `.sh` extensions. ifram
 Keep this schema identical to the bundled `index_schema.json` files in `labex-cli/src/labex_cli/labex/commands/lab/` and `labex-agent/src/labex_agent/shared/`.
 
 `backend.imageid` accepts any nonempty string without whitespace, including newly added image identifiers. The schema does not enumerate images or establish runtime availability; the deployment platform or VM tooling checks whether an identifier is supported.
+
+Simple labs default to `ttyd-ubuntu:2204`. Custom learner Interfaces prefer `ubuntu-no-service:2204` (container); choose `instance-ubuntu-no-service:2204` only when instance capabilities are required. Both no-service images have no default services and need a nonempty list of valid, usable `backend.services` entries for normal startup. Supported ttyd and iframe entries may form a single terminal, multiple role terminals, web-only pages or a combination. Interface count does not imply instance privileges. The generic schema validates service structure; application readiness, required no-service entry completeness and actual platform startup must also be checked by authors and runtime tooling.
 
 ```json
 {
